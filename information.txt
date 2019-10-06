@@ -1,0 +1,45 @@
+ESB 
+  CONFIGURATION FILE
+    DEV : https://subversion/systems/Development/EAI%20Development/build/properties/
+  SOURCE CODE:
+    https://subversion/systems/Development/EAI%20Development/
+	STATEMENT READER SERVICE = https://subversion/systems/Development/EAI%20Development/services/esb/statement-processing-ha/branches/1.8/
+	STATEMENT PROCESSOR SERVICE = https://subversion/systems/Development/EAI%20Development/services/esb/statement-processing/branches/1.7/ 
+
+  Jump host: xlxjumpn00
+	d01-esb-a/q01-esb-a: xlxesbappn01a
+	To start / stop d01-esb-a:
+	  sudo su - d01_esb_a
+	  /d01_esb_a/bin/jboss_start.sh
+	  /d01_esb_a/bin/jboss_kill.sh
+
+GIT
+    LIST: git config -l --show-origin
+  CONFIG:
+    SET_PROXY: git config http.sslVerify false OR GIT_SSL_NO_VERIFY=true git command
+  LOG:
+    git log --graph --all --decorate --source --name-only -n 10
+  BRANCH:
+    DELETE:
+      LOCAL BRACH: $ git branch -d <branch_name>
+	  REMOTE BRACH: $ git push --delete <remote_name> <branch_name>
+	  In most cases the remote name is origin.
+	DIFF:
+	  git diff master : Diff between current branch and master
+	  git diff master..staging : Diff between two branches, e.g. master and staging
+	  git diff --name-status master..staging : Show only files that are different between the two branches (without changes themselves)
+    CREATE:	
+	  git checkout -b [name_of_your_new_branch]
+	PUSH:
+	  GIT_SSL_NO_VERIFY=true git push origin <New Branch Name>
+	  
+TRACE:
+  PROXY: Change Transformer.vmoptions with below details
+    -Djava.net.useSystemProxies=false
+    -Dhttp.nonProxyHosts=*.inv.adroot.lgim.com|d01-inv-ora
+    -Dhttp.proxyHost=websense
+    -Dhttp.proxyPort=8080
+    -Dhttp.proxyUser=eai_qa_web_proxy
+    -Dhttp.proxyPassword=eai_qa_web
+	  
+	  
